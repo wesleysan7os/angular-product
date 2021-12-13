@@ -4,16 +4,16 @@ import { IProduct } from "./product";
 @Component({
   selector: 'pm-products',
   templateUrl: './product-list-component.html',
-  styleUrls: ['./product-list-component.css']
+  styleUrls: ['./product-list-component.css'],
 })
 export class ProductListComponent implements OnInit {
   pageTitle = 'Product List';
   imageWidth = 50;
   imageMargin = 2;
   showImage = false;
-  
-  private _listFilter = ''; 
-  
+
+  private _listFilter = '';
+
   get listFilter(): string {
     return this._listFilter;
   }
@@ -79,7 +79,13 @@ export class ProductListComponent implements OnInit {
 
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.products.filter((product: IProduct) => product.productName.toLocaleLowerCase().includes(filterBy));
+    return this.products.filter((product: IProduct) =>
+      product.productName.toLocaleLowerCase().includes(filterBy)
+    );
+  }
+
+  onRatingClicked(message: string): void {
+    this.pageTitle = 'Product List ' + message;
   }
 
   toggleImage(): void {
@@ -87,6 +93,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.filteredProducts = this.products;
+    this.filteredProducts = this.products;
   }
 }
